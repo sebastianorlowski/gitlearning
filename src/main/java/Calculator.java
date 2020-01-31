@@ -14,5 +14,9 @@ public class Calculator {
         return x - y;
     }
 
+    public static Integer divineNumbers(Integer x, Integer y) {
+        return x / y;
+    }
+
 
 }
