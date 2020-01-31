@@ -18,5 +18,10 @@ public class Calculator {
         return x / y;
     }
 
+    public static Integer multiplyNumbers(Integer x, Integer y) {
+        return x * y;
+
+    }
+
 
 }

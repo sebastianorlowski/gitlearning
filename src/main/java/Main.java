@@ -9,6 +9,9 @@ public class Main {
         y = scanner.nextInt();
         System.out.println(Calculator.addNumbers(x,y));
         System.out.println(Calculator.substractNumbers(x,y));
+
         System.out.println(Calculator.divineNumbers(x,y));
+        System.out.println(Calculator.multiplyNumbers(x,y));
+
     }
 }
