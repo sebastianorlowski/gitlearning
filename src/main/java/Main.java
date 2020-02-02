@@ -1,7 +1,31 @@
 import java.util.Scanner;
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
+    static UserDao userDao = new UserDao();
+    public static void createUser() {
+        String name, lastName;
+        Integer age;
 
-    public static void calculator(){
+        System.out.println("Enter name");
+        name = scanner.next();
+        System.out.println("Enter last name");
+        lastName = scanner.next();
+        System.out.println("Enter age");
+        age = scanner.nextInt();
+
+        User user = new User(name, lastName, age);
+        userDao.createUser(user);
+        System.out.println("You created a user " + user.toString());
+    }
+
+    public static void main(String[] args) {
+        createUser();
+
+        System.out.println(userDao.getAllUsers());
+    }
+
+
+    /**public static void calculator(){
         Integer x,y;
         System.out.println("Podaj dwie liczby ");
         x = scanner.nextInt();
@@ -29,4 +53,5 @@ public class Main {
        user();
 
     }
+     **/
 }
