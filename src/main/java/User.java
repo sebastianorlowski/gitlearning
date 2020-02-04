@@ -1,13 +1,11 @@
 public class User {
-    String name;
-    String lastName;
-    Integer age;
+    private Integer id;
+    private String name;
+    private String lastName;
+    private Integer age;
 
-    @Override
-    public String toString() {
-        return  "name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age + "\n";
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
@@ -22,11 +20,25 @@ public class User {
         return age;
     }
 
+    public User(Integer id,String name, String lastName, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
     public User(String name, String lastName, Integer age) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }

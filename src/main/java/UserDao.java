@@ -34,14 +34,14 @@ public class UserDao {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
+                Integer id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String lastName = resultSet.getString("lastname");
                 Integer age = resultSet.getInt("age");
 
-                User user = new User(name, lastName, age);
+                User user = new User(id, name, lastName, age);
                 users.add(user);
             }
-
 
         statement.close();
         }
@@ -68,6 +68,84 @@ public class UserDao {
             catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+
+        public void deleteUserById(Integer id) {
+            PreparedStatement statement;
+
+            try {
+                String query = "delete from " + tableName + " where id = ?";
+                statement = connection.prepareStatement(query);
+                statement.setInt(1, id);
+                statement.execute();
+                statement.close();
+             }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        public void getUserById(Integer id) {
+        PreparedStatement statement;
+
+        try {
+            String query = "select * from " + tableName + " where id = " + id;
+            statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while(resultSet.next()) {
+                String name = resultSet.getString("name");
+                String lastName = resultSet.getString("lastname");
+                Integer age = resultSet.getInt("age");
+                System.out.println(name + " " + lastName + " " + age);
+            }
+            statement.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        }
+
+        public void getLastInsertId() {
+        PreparedStatement statement;
+
+        try {
+            String query = "select last_insert_id()";
+            statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while(resultSet.next()) {
+                Integer id = resultSet.getInt("last_insert_id()");
+                System.out.println("Your id is " + id);
+            }
+            statement.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        }
+
+        public void updateUserById(User user) {
+        PreparedStatement statement;
+
+        try {
+            String query =
+                    "update " + tableName + " set name = ?, lastname = ? , age = ? where id = ?;";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getLastName());
+            statement.setInt(3, user.getAge());
+            statement.setInt(4, user.getId());
+
+            System.out.println("Youre are update user to " + user.getName() + user.getLastName() + user.getAge());
+            statement.execute();
+            statement.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
         }
 
     }
