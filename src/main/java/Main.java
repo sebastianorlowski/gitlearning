@@ -2,9 +2,10 @@ import java.util.Scanner;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static UserDao userDao = new UserDao();
+    static UserRoleDao userRoleDao = new UserRoleDao();
 
     public static void createUser() {
-        String name, lastName;
+        String name, lastName, role;
         Integer age;
 
         System.out.println("Enter name");
@@ -13,8 +14,10 @@ public class Main {
         lastName = scanner.next();
         System.out.println("Enter age");
         age = scanner.nextInt();
+        System.out.println("Enter user role(USER/MODERATOR/ADMIN)");
+        role = scanner.next();
 
-        User user = new User(name, lastName, age);
+        User user = new User(name, lastName, age, new UserRole(Role.valueOf(role)));
         userDao.createUser(user);
         System.out.println("You created a user " + user.toString());
         userDao.getLastInsertId();
@@ -30,7 +33,7 @@ public class Main {
     }
 
     public static void updateUser() {
-        String name, lastName;
+        String name, lastName, role;
         Integer age, id;
         System.out.println("Enter id to update");
         id = scanner.nextInt();
@@ -41,13 +44,16 @@ public class Main {
         lastName = scanner.next();
         System.out.println("Enter new age");
         age = scanner.nextInt();
+        System.out.println("Enter new user role");
+        role = scanner.next();
 
-        User user = new User(id, name, lastName, age);
+        User user = new User(id, name, lastName, age, new UserRole(Role.valueOf(role)));
         userDao.updateUserById(user);
 
     }
 
     public static void main(String[] args) {
+        System.out.println("User roles " + userRoleDao.getAllUserRoles());
         createUser();
         updateUser();
         deleteUser();
